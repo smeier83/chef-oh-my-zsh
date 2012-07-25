@@ -9,6 +9,11 @@
 
 # Assumes that the user is already setup with zsh as their default shell
 
+# install zsh
+package "zsh" do
+	action :install
+end
+
 node[:oh_my_zsh][:users].each do |zsh_user|
   
   script "suck down oh-my-zsh" do
@@ -17,16 +22,14 @@ node[:oh_my_zsh][:users].each do |zsh_user|
     code <<-EOH
     rm -fr /home/#{zsh_user}/.oh-my-zsh
     /usr/bin/env git clone https://github.com/robbyrussell/oh-my-zsh.git /home/#{zsh_user}/.oh-my-zsh
-    mv /home/#{zsh_user}/.oh-my-zsh/templates/zshrc.zsh-template /home/#{zsh_user}/.zshrc
     EOH
   end
-
-
-  execute "Change the default style" do
-    user zsh_user
-    command <<-EOH
-    sed -i 's/ZSH_THEME=\"robbyrussell\"/ZSH_THEME=\"gentoo\"/' /home/#{zsh_user}/.zshrc
-    EOH
+  
+   # install new .zshrc file from files
+  cookbook_file "/home/#{zsh_user}/.zshrc" do
+    source ".zshrc"
+    mode 0755
+    owner "#{zsh_user}"
   end
 
   script "Turn off auto update functionality" do
