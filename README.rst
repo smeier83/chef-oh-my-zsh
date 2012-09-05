@@ -16,6 +16,8 @@ eg.
 FLOW3 Plugin
 ============
 
-This is just an addon for the oh-my-zsh recipe to add the `FLOW3<http://flow3.org>`_ plugin.
+This is just an addon for the oh-my-zsh recipe to add the FLOW3_ plugin.
 
 The plugin can be found  here: https://github.com/sandstorm/oh-my-zsh-flow3-plugin
+
+.. _FLOW3 http://flow3.org
