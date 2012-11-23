@@ -9,13 +9,15 @@
 
 # Assumes that the user is already setup with zsh as their default shell
 
+include_recipe "git"
+
 # install zsh
 package "zsh" do
 	action :install
 end
 
 node[:oh_my_zsh][:users].each do |zsh_user|
-  
+
   script "suck down oh-my-zsh" do
     interpreter "bash"
     user zsh_user
@@ -24,7 +26,7 @@ node[:oh_my_zsh][:users].each do |zsh_user|
     /usr/bin/env git clone https://github.com/robbyrussell/oh-my-zsh.git /home/#{zsh_user}/.oh-my-zsh
     EOH
   end
-  
+
    # install new .zshrc file from files
   cookbook_file "/home/#{zsh_user}/.zshrc" do
     source ".zshrc"
