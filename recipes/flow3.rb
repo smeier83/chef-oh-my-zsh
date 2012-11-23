@@ -5,7 +5,7 @@ node[:oh_my_zsh][:users].each do |zsh_user|
 
 	#install zsh plugin for FLOW3
 	script "install flow3 zsh plugin" do
-		interpreter "bash"
+		interpreter "zsh"
 		user zsh_user
 		code <<-EOH
 		git clone https://github.com/sandstorm/oh-my-zsh-flow3-plugin.git /home/#{zsh_user}/.oh-my-zsh/custom/plugins/flow3
